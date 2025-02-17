@@ -1,11 +1,23 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+<div style="text-align: center;">
+  <%= tag.div(flash[:alert], style: "color:red; font-weight: bold;") if flash[:alert] %>
+  <%= tag.div(flash[:notice], style: "color:green; font-weight: bold;") if flash[:notice] %>
 
-<%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
-<% end %>
-<br>
+  <h1>Sign In</h1>
 
-<%= link_to "Forgot password?", new_password_path %>
+  <%= form_with url: session_path, style: "max-width: 400px; margin: 0 auto;" do |form| %>
+    <div style="margin-bottom: 15px;">
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], style: "width: 100%; padding: 8px; border-radius: 4px;" %>
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, style: "width: 100%; padding: 8px; border-radius: 4px;" %>
+    </div>
+
+    <%= form.submit "Sign in", style: "width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px;" %>
+  <% end %>
+
+  <div style="margin-top: 15px;">
+    <%= link_to "Forgot password?", new_password_path, style: "color: #007bff;" %><br>
+    <%= link_to "Don't have an account? Register here", new_user_path, style: "color: #007bff; margin-top: 10px;" %>
+  </div>
+</div>
