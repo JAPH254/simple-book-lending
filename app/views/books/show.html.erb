@@ -1,28 +1,9 @@
-<div style="position: relative; padding: 20px;">
-  <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-danger", style: "position: absolute; top: 10px; right: 10px;" %>
+<h1><%= @book.title %></h1>
+<p><strong>Author:</strong> <%= @book.author %></p>
+<p><strong>ISBN:</strong> <%= @book.isbn %></p>
 
-  <h1 style="text-align: center;">Book Details</h1>
-
-  <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-    <tr>
-      <th style="text-align: left; padding: 10px; border: 1px solid #ddd;">Title</th>
-      <td style="padding: 10px; border: 1px solid #ddd;"><%= @book.title %></td>
-    </tr>
-    <tr>
-      <th style="text-align: left; padding: 10px; border: 1px solid #ddd;">Author</th>
-      <td style="padding: 10px; border: 1px solid #ddd;"><%= @book.author %></td>
-    </tr>
-    <tr>
-      <th style="text-align: left; padding: 10px; border: 1px solid #ddd;">ISBN</th>
-      <td style="padding: 10px; border: 1px solid #ddd;"><%= @book.isbn %></td>
-    </tr>
-  </table>
-
-  <% if !@book.available || @book.borrowings.where(returned_at: nil).exists? %>
-    <p style="color: red; font-weight: bold; text-align: center; margin-top: 20px;">This book is currently borrowed or not available.</p>
-  <% else %>
-    <div style="text-align: center; margin-top: 20px;">
-      <%= button_to "Borrow", book_borrowings_path(@book), method: :post, class: "btn btn-primary" %>
-    </div>
-  <% end %>
-</div>
+<% if @book.borrowings.where(returned_at: nil).exists? %>
+  <p style="color: red;">This book is already borrowed.</p>
+<% else %>
+  <%= button_to 'Borrow', borrow_book_path(@book), method: :post, class: 'btn btn-primary' %>
+<% end %>
