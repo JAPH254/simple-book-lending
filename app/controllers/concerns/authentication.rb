@@ -49,4 +49,7 @@ module Authentication
       Current.session.destroy
       cookies.delete(:session_id)
     end
+    def current_user
+      @current_user ||= Current.session&.user
+    end
 end
