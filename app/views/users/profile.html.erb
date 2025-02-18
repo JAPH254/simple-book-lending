@@ -1,20 +1,59 @@
-<h1><%= @user.username %>'s Profile</h1>
+<div class="container mt-5 bg-primary">
+  <div class="row">
+    <!-- User Information Section -->
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title">User Profile</h4>
+          <p><strong>Name:</strong> <%= current_user.username %></p>
+          <p><strong>Email:</strong> <%= current_user.email_address %></p>
+        </div>
+      </div>
+    </div>
 
-<p><strong>Email:</strong> <%= @user.email_address %></p>
+    <!-- Borrowed Books Section -->
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title">Borrowed Books</h4>
+          <% if @borrowed_books.any? %>
+            <% @borrowed_books.each do |borrowing| %>
+              <div class="border-bottom pb-2 mb-2">
+                <h5><%= borrowing.book.title %> by <%= borrowing.book.author %></h5>
+                <p><strong>Due Date:</strong> <%= borrowing.due_date.strftime("%B %d, %Y") %></p>
 
-<h2>Currently Borrowed Books</h2>
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Status</th>
-  </tr>
+                <% if borrowing.returned_at.nil? %>
+                  <%= link_to 'Return Book', return_book_book_path(borrowing.book), method: :patch, class: "btn btn-danger btn-sm", data: { turbo_method: :patch } %>
+                <% end %>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-muted">You have not borrowed any books yet.</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <% @borrowed_books.each do |borrowing| %>
-    <tr>
-      <td><%= borrowing.book.title %></td>
-      <td><%= borrowing.book.author %></td>
-      <td><%= borrowing.returned_at.nil? ? 'Borrowed' : 'Returned' %></td>
-    </tr>
-  <% end %>
-</table>
+  <!-- Available Books Section -->
+  <div class="mt-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title">Available Books</h4>
+        <div class="row">
+          <% Book.available.each do |book| %>
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><%= book.title %></h5>
+                  <p class="card-text"><strong>Author:</strong> <%= book.author %></p>
+                  <%= link_to "Borrow", borrow_book_path(book), method: :post, class: "btn btn-primary btn-sm", data: { turbo_method: :post } %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
