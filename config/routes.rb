@@ -7,17 +7,14 @@ Rails.application.routes.draw do
 
   root "books#index"
 
+  # Fix: Single `resources :books` block
   resources :books, only: [:index, :show] do
     member do
       post 'borrow'
-      patch 'return_book'
+      patch 'return', to: 'books#return_book', as: 'return_book'
     end
   end
-  resources :books, only: [:index, :show] do
-    post 'borrow', to: 'borrowings#create', as: 'borrow'
-    patch 'return', to: 'borrowings#return_book', as: 'return_book'
-  end
-  
+
   get 'profile', to: 'users#profile'
 
   resources :borrowings, only: [:update]
