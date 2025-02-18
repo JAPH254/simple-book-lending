@@ -5,5 +5,5 @@ class User < ApplicationRecord
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   has_many :borrowings
-  has_many :books, through: :borrowings
+  has_many :books, through: :borrowings,source: :book
 end
