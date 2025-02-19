@@ -1,28 +1,33 @@
-<div style="text-align: center;">
-  <h1>Sign Up</h1>
+<div style="text-align: center; padding: 20px; font-family: Arial, sans-serif;">
+  <!-- Page Title -->
+  <h1 style="margin-bottom: 30px;">Sign Up</h1>
 
-  <%= form_with model: @user, url: users_path, style: "max-width: 400px; margin: 0 auto;" do |form| %>
-    <div style="margin-bottom: 15px;">
-      <%= form.label :email_address, style: "font-weight: bold;" %>
-      <%= form.email_field :email_address, style: "width: 100%; padding: 8px; border-radius: 4px;" %>
-    </div>
+  <!-- Form Container (centered with max-width of 400px) -->
+  <div style="max-width: 400px; margin: 0 auto; text-align: left;">
+    <%= form_with model: @user, url: users_path do |form| %>
+      <div style="margin-bottom: 15px;">
+        <%= form.label :email_address, style: "font-weight: bold; display: block; margin-bottom: 5px;" %>
+        <%= form.email_field :email_address, style: "width: 80%; padding: 8px; border-radius: 4px; display: block; margin: 0 auto;" %>
+      </div>
 
-    <div style="margin-bottom: 15px;">
-      <%= form.label :username, style: "font-weight: bold;" %>
-      <%= form.text_field :username, style: "width: 100%; padding: 8px; border-radius: 4px;" %>
-    </div>
+      <div style="margin-bottom: 15px;">
+        <%= form.label :username, style: "font-weight: bold; display: block; margin-bottom: 5px;" %>
+        <%= form.text_field :username, style: "width: 80%; padding: 8px; border-radius: 4px; display: block; margin: 0 auto;" %>
+      </div>
 
-    <div style="margin-bottom: 15px;">
-      <%= form.label :password, style: "font-weight: bold;" %>
-      <%= form.password_field :password, style: "width: 100%; padding: 8px; border-radius: 4px;" %>
-    </div>
+      <div style="margin-bottom: 15px;">
+        <%= form.label :password, style: "font-weight: bold; display: block; margin-bottom: 5px;" %>
+        <%= form.password_field :password, style: "width: 80%; padding: 8px; border-radius: 4px; display: block; margin: 0 auto;" %>
+      </div>
 
-    <div style="margin-top: 20px;">
-      <%= form.submit "Sign Up", style: "width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px;" %>
-    </div>
-  <% end %>
+      <div style="margin-top: 20px; text-align: center;">
+        <%= form.submit "Sign Up", style: "padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;" %>
+      </div>
+    <% end %>
+  </div>
 
+  <!-- Login Link -->
   <div style="margin-top: 15px;">
-    <%= link_to "Already have an account? Login here", new_session_path, style: "color: #007bff;" %>
+    <%= link_to "Already have an account? Login here", new_session_path, style: "color: #007bff; text-decoration: none; font-weight: bold;" %>
   </div>
 </div>
