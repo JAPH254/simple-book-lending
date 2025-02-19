@@ -1,23 +1,50 @@
-<div style="text-align: center;">
-  <%= tag.div(flash[:alert], style: "color:red; font-weight: bold;") if flash[:alert] %>
-  <%= tag.div(flash[:notice], style: "color:green; font-weight: bold;") if flash[:notice] %>
-
-  <h1>Sign In</h1>
-
-  <%= form_with url: session_path, style: "max-width: 400px; margin: 0 auto;" do |form| %>
-    <div style="margin-bottom: 15px;">
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], style: "width: 100%; padding: 8px; border-radius: 4px;" %>
-    </div>
-    
-    <div style="margin-bottom: 20px;">
-      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, style: "width: 100%; padding: 8px; border-radius: 4px;" %>
-    </div>
-
-    <%= form.submit "Sign in", style: "width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px;" %>
+<div style="text-align: center; font-family: Arial, sans-serif; padding: 20px;">
+  <!-- Flash Messages -->
+  <% if flash[:alert] %>
+    <div style="color: red; font-weight: bold; margin-bottom: 10px;"><%= flash[:alert] %></div>
+  <% end %>
+  <% if flash[:notice] %>
+    <div style="color: green; font-weight: bold; margin-bottom: 10px;"><%= flash[:notice] %></div>
   <% end %>
 
+  <h1 style="margin-bottom: 30px;">Sign In</h1>
+
+  <!-- Form Container (centered, fixed max width) -->
+  <div style="max-width: 400px; margin: 0 auto; text-align: left;">
+    <%= form_with url: session_path do |form| %>
+      <!-- Email Field -->
+      <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <%= form.label :email_address, "Email:", style: "width: 100px; margin-right: 10px;" %>
+        <%= form.email_field :email_address,
+              required: true,
+              autofocus: true,
+              autocomplete: "username",
+              placeholder: "Enter your email address",
+              value: params[:email_address],
+              style: "width: calc(100% - 110px); padding: 8px; border: 1px solid #ccc; border-radius: 4px;" %>
+      </div>
+
+      <!-- Password Field -->
+      <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <%= form.label :password, "Password:", style: "width: 100px; margin-right: 10px;" %>
+        <%= form.password_field :password,
+              required: true,
+              autocomplete: "current-password",
+              placeholder: "Enter your password",
+              maxlength: 72,
+              style: "width: calc(100% - 110px); padding: 8px; border: 1px solid #ccc; border-radius: 4px;" %>
+      </div>
+
+      <!-- Submit Button -->
+      <div style="text-align: center; margin-top: 20px;">
+        <%= form.submit "Sign in", style: "width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Navigation Links -->
   <div style="margin-top: 15px;">
-    <%= link_to "Forgot password?", new_password_path, style: "color: #007bff;" %><br>
-    <%= link_to "Don't have an account? Register here", new_user_path, style: "color: #007bff; margin-top: 10px;" %>
+    <%= link_to "Forgot password?", new_password_path, style: "color: #007bff; text-decoration: none;" %><br>
+    <%= link_to "Don't have an account? Register here", new_user_path, style: "color: #007bff; text-decoration: none; margin-top: 10px;" %>
   </div>
 </div>
