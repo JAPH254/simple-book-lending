@@ -1,59 +1,54 @@
-<div class="container mt-5 bg-primary">
-  <div class="row">
+<div style="position: relative; padding: 20px; font-family: Arial, sans-serif; background-color: #f8f9fa;">
+  <div style="position: absolute; top: 10px; left: 10px; margin:2rem;">
+    <a href="<%= books_path %>" style="text-decoration: none; color: #007bff; font-weight: bold;">Books</a> |
+    <a href="<%= profile_path %>" style="text-decoration: none; color: #007bff; font-weight: bold;">Profile</a>
+  </div>
+  <div style="position: absolute; top: 10px; right: 10px;">
+    <%= button_to "Logout", logout_path, method: :delete, style: "background-color: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;" %>
+  </div>
+
+  <!-- Page Title -->
+  <h1 style="text-align: center; margin-top: 50px;">Available Books</h1>
+
+  <!-- Top Row: User Info & Borrowed Books -->
+  <div style="display: flex; justify-content: space-between; margin-top: 30px;">
     <!-- User Information Section -->
-    <div class="col-md-4">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h4 class="card-title">User Profile</h4>
-          <p><strong>Name:</strong> <%= current_user.username %></p>
-          <p><strong>Email:</strong> <%= current_user.email_address %></p>
-        </div>
-      </div>
+    <div style="flex: 0 0 30%; padding: 15px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <h4 style="margin-bottom: 15px;">User Profile</h4>
+      <p style="margin: 5px 0;"><strong>Name:</strong> <%= current_user.username %></p>
+      <p style="margin: 5px 0;"><strong>Email:</strong> <%= current_user.email_address %></p>
     </div>
 
     <!-- Borrowed Books Section -->
-    <div class="col-md-8">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h4 class="card-title">Borrowed Books</h4>
-          <% if @borrowed_books.any? %>
-            <% @borrowed_books.each do |borrowing| %>
-              <div class="border-bottom pb-2 mb-2">
-                <h5><%= borrowing.book.title %> by <%= borrowing.book.author %></h5>
-                <p><strong>Due Date:</strong> <%= borrowing.due_date.strftime("%B %d, %Y") %></p>
-
-                <% if borrowing.returned_at.nil? %>
-                  <%= link_to 'Return Book', return_book_book_path(borrowing.book), method: :patch, class: "btn btn-danger btn-sm", data: { turbo_method: :patch } %>
-                <% end %>
-              </div>
+    <div style="flex: 0 0 65%; padding: 15px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <h4 style="margin-bottom: 15px;">Borrowed Books</h4>
+      <% if @borrowed_books.any? %>
+        <% @borrowed_books.each do |borrowing| %>
+          <div style="border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px;">
+            <h5 style="margin: 0 0 5px 0;"><%= borrowing.book.title %> by <%= borrowing.book.author %></h5>
+            <p style="margin: 0 0 5px 0;"><strong>Due Date:</strong> <%= borrowing.due_date.strftime("%B %d, %Y") %></p>
+            <% if borrowing.returned_at.nil? %>
+              <%= link_to 'Return Book', return_book_book_path(borrowing.book), method: :patch, data: { turbo_method: :patch }, style: "background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px; font-size: 14px;" %>
             <% end %>
-          <% else %>
-            <p class="text-muted">You have not borrowed any books yet.</p>
-          <% end %>
-        </div>
-      </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p style="color: #777;">You have not borrowed any books yet.</p>
+      <% end %>
     </div>
   </div>
 
   <!-- Available Books Section -->
-  <div class="mt-4">
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <h4 class="card-title">Available Books</h4>
-        <div class="row">
-          <% Book.available.each do |book| %>
-            <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><%= book.title %></h5>
-                  <p class="card-text"><strong>Author:</strong> <%= book.author %></p>
-                  <%= link_to "Borrow", borrow_book_path(book), method: :post, class: "btn btn-primary btn-sm", data: { turbo_method: :post } %>
-                </div>
-              </div>
-            </div>
-          <% end %>
+  <div style="margin-top: 40px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h4 style="margin-bottom: 15px;">Available Books</h4>
+    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+      <% Book.available.each do |book| %>
+        <div style="flex: 0 0 calc(33.33% - 10px); padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+          <h5 style="margin: 0 0 10px 0;"><%= book.title %></h5>
+          <p style="margin: 0 0 10px 0;"><strong>Author:</strong> <%= book.author %></p>
+          <%= link_to "Borrow", borrow_book_path(book), method: :post, data: { turbo_method: :post }, style: "background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px; font-size: 14px;" %>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -4,16 +4,17 @@ class BorrowingsController < ApplicationController
     def create
       @book = Book.find(params[:book_id])
       @user = current_user
-  
+    
       if @book.available?
-        @book.update(available: false)  
-        @borrowing = Borrowing.create(user: @user, book: @book)
-  
-        redirect_to profile_path, notice: "You have successfully borrowed '#{@book.title}'. Due date: #{@borrowing.due_date.strftime('%B %d, %Y')}"
+        @book.update(available: false)
+        @borrowing = Borrowing.create(user: @user, book: @book, due_date: 2.weeks.from_now)
+    
+        redirect_to profile_path, notice: "You have successfully borrowed '#{@book.title}'. Due date: #{@borrowing.due_date.strftime('%B %d, %Y')}."
       else
         redirect_to books_path, alert: "This book is currently unavailable."
       end
     end
+    
   
     def return_book
       @book = Book.find(params[:book_id])

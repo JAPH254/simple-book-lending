@@ -7,19 +7,21 @@ Rails.application.routes.draw do
 
   root "books#index"
 
-  # Fix: Single `resources :books` block
   resources :books, only: [:index, :show] do
     member do
-      post 'borrow'
+      post 'borrow', to: 'books#borrow'
       patch 'return', to: 'books#return_book', as: 'return_book'
+    end
+
+    # Nest BorrowingsController routes under books.
+    resources :borrowings, only: [:create] do
+      collection do
+        patch 'return_book', to: 'borrowings#return_book'
+      end
     end
   end
 
   get 'profile', to: 'users#profile'
-
-  resources :borrowings, only: [:update]
-
-  resource :user, only: [:show]
   
   delete "/logout", to: "sessions#destroy"
 end

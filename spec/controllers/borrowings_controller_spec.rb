@@ -25,7 +25,6 @@ RSpec.describe BorrowingsController, type: :controller do
 
     context "when the book is unavailable" do
       it "redirects to books path with an alert" do
-        # Ensure the book is unavailable.
         book.update(available: false)
         post :create, params: { book_id: book.id }
         expect(response).to redirect_to(books_path)

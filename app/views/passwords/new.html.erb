@@ -1,8 +1,28 @@
-<h1>Forgot your password?</h1>
+<div style="text-align: center; font-family: Arial, sans-serif; padding: 20px;">
+  <h1 style="margin-bottom: 30px;">Forgot your password?</h1>
 
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+  <% if flash[:alert] %>
+    <div style="color: red; font-weight: bold; margin-bottom: 20px;"><%= flash[:alert] %></div>
+  <% end %>
 
-<%= form_with url: passwords_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.submit "Email reset instructions" %>
-<% end %>
+  <div style="max-width: 400px; margin: 0 auto; text-align: left;">
+    <%= form_with url: passwords_path do |form| %>
+      <!-- Email Field -->
+      <div style="display: flex; align-items: center; margin-bottom: 15px;">
+        <%= form.label :email_address, "Email:", style: "width: 100px; margin-right: 10px;" %>
+        <%= form.email_field :email_address, 
+              required: true, 
+              autofocus: true, 
+              autocomplete: "username", 
+              placeholder: "Enter your email address", 
+              value: params[:email_address], 
+              style: "width: calc(100% - 110px); padding: 8px; border: 1px solid #ccc; border-radius: 4px;" %>
+      </div>
+
+      <!-- Submit Button -->
+      <div style="text-align: center; margin-top: 20px;">
+        <%= form.submit "Email reset instructions", style: "width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;" %>
+      </div>
+    <% end %>
+  </div>
+</div>
