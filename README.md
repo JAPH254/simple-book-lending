@@ -53,5 +53,15 @@ BookLibrary is a Ruby on Rails application for managing a library system. This g
 If you're using Spring, stop it before running tests:
 ```bash
 spring stop
+```
 
+10. Navigating the application
+
+![alt text](image.png)
+this is the landing page. If you have not signed in, youll be resirected to the login. simply create an account and login to see the books.
+
+Woouoow. Feel free to navigate through your application. Enjoy your reading! 😊
+
+
+This README provides clear instructions on installation, running the app, and executing tests.I am finishing on all the tests. Let me know if you need any further modifications!
 
