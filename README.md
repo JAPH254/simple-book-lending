@@ -1,47 +1,57 @@
 # BookLibrary
 
-BookLibrary is a Ruby on Rails application for managing a library system. Users can register, log in, view available books, borrow books (with a due date), and return them.
+BookLibrary is a Ruby on Rails application for managing a library system. This guide will help you install the application, run it, and execute the test suite.
 
-## Table of Contents
+## Installation
 
-- [Prerequisites](#prerequisites)
-- [Setup](#setup)
-- [Database Setup](#database-setup)
-- [Running the Application](#running-the-application)
-- [Running the Tests](#running-the-tests)
-- [Additional Notes](#additional-notes)
-
-## Prerequisites
+### Prerequisites
 
 - **Ruby** (version 3.4.1 or later)
-- **Rails** (version 7.x recommended)
+- **Rails** (version 8.x recommended)
 - **Bundler**
-- **SQLite3** (or your preferred database)
+- **SQLite3** (or another supported database)
 
-## Setup
+### Steps
 
-1. **Clone the Repository:**
-
+1. **Clone the Repository**
    ```bash
-   git clone <repository_url>
+   https://github.com/JAPH254/simple-book-lending.git
    cd book_library
-Install Dependencies:
 
-Install the required gems with Bundler:
+2. **Install Dependencies**
 
    ```bash
    bundle install
-   
-   Run the Database Migrations:
-   bundle exec rake db:migrate
-    
-    Run the Database Seeds:
-    bundle exec rake db:seed
 
-    Run the Application:
-    rails server
+3. **run the database migrations**
 
-    Running the Tests
-   bundle exec rspec spec
+   ```bash
+   rails db:migrate
 
-   
+4. **Seed the database**
+   ```bash
+   rails db:seed
+
+5. **Start the Rails server**
+
+   ```bash
+   rails server
+
+6. **Open your web browser and navigate to `http://localhost:3000` to see the application in action.**
+
+7. Run All Tests
+   ```bash
+   bundle exec rspec
+
+8. **Run Specific Tests**
+   ```bash
+   bundle exec rspec spec/controllers/books_controller_spec.rb
+   ```
+
+9. Troubleshooting
+
+If you're using Spring, stop it before running tests:
+```bash
+spring stop
+
+
