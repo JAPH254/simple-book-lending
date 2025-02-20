@@ -63,5 +63,5 @@ this is the landing page. If you have not signed in, youll be resirected to the 
 Woouoow. Feel free to navigate through your application. Enjoy your reading! 😊
 
 
-This README provides clear instructions on installation, running the app, and executing tests.I am finishing on all the tests. Let me know if you need any further modifications!
+This README provides clear instructions on installation, running the app, and executing tests.I am finishing on all the failing tests. I am at the implementation and testing phase. I will continue to work on the implementation and testing until all tests pass. Thank you for your patience and understanding.😊 Let me know if you need any further modifications!
 
